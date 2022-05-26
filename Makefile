@@ -57,8 +57,8 @@ scas_HEADERS =
 ### TARGET: sokol
 
 sokol_OBJECTS = build/obj/lib/sokol/sokol.o build/obj/lib/sokol/sokol_cpp.o
-$(sokol_OBJECTS): EXTRA_CFLAGS := 
-$(sokol_OBJECTS): EXTRA_CXXFLAGS := 
+$(sokol_OBJECTS): EXTRA_CFLAGS := -lgl -lX11
+$(sokol_OBJECTS): EXTRA_CXXFLAGS := -lgl -lX11
 
 sokol_HEADERS = lib/sokol/sokol_app.h lib/sokol/sokol_args.h lib/sokol/sokol_audio.h lib/sokol/sokol_fetch.h lib/sokol/sokol_gfx.h lib/sokol/sokol_glue.h lib/sokol/sokol_time.h lib/sokol/util/sokol_debugtext.h lib/sokol/util/sokol_fontstash.h lib/sokol/util/sokol_gfx_imgui.h lib/sokol/util/sokol_gl.h lib/sokol/util/sokol_imgui.h lib/sokol/util/sokol_memtrack.h
 
@@ -92,4 +92,4 @@ $(Zany80_OBJECTS): EXTRA_CXXFLAGS :=
 Zany80_HEADERS = src/XML.h src/editor.h src/global.h src/graphics.h src/license.h src/ring_buffer.h src/scas.h src/serial.h src/z80.h src/z80_tab.h src/zexall.h
 
 build/Zany80: $(Zany80_OBJECTS)  $(TextEditor_OBJECTS) $(cimgui_OBJECTS) $(rapidxml_OBJECTS) $(scas_OBJECTS) $(sokol_OBJECTS) $(stb_OBJECTS) $(z80e_OBJECTS)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
